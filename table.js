@@ -1,4 +1,4 @@
-var a = [
+var array = [
   {
       name: "Anita",
       gender:  "Female",
@@ -44,23 +44,66 @@ var a = [
   },
   
 ];
-var k = '<tbody>'
-for(i = 0;i < a.length; i++){
-   k+= '<tr>';
-  k+= '<td>' + a[i].name + '</td>';
+var rep = '<tbody id="b1">'
+for(i = 0;i < array.length; i++){
+   rep+= '<tr >';
+  rep+= '<td >' + array[i].name + '</td>';
   
-   k+= '<td>' + a[i].gender + '</td>';
+   rep+= '<td >' + array[i].gender + '</td>';
    
-   k+= '<td>' + a[i].mobile + '</td>';
-  k+= '<td>' + a[i].email+ '</td>';
-  k+= '<td>' + '<button type="button" >EDIT</button>' + '</td>';
-  k+= '<td>' + '<button type="button"">Remove</button>' + '</td>';
-  k+= '</tr>';
+   rep+= '<td >' + array[i].mobile + '</td>';
+  rep+= '<td >' + array[i].email+ '</td>';
+  rep+= '<td >' + '<button type="button" onclick="edit(this)">EDIT</button>' + '</td>';
+  rep+= '<td>' + '<button type="button" onclick="del(this)">DELETE</button>' + '</td>';
+  rep+= '</tr>';
 }
-k+='</tbody>';
-document.getElementById('tab').innerHTML = k;
+rep+='</tbody>';
+document.getElementById('tab').innerHTML = rep;
 
+function del(td){
+  row=td.parentElement.parentElement;
+  document.getElementById("demo").deleteRow(row.rowIndex);
+}
 
+// var table = document.getElementById("tab"),rIndex;
+              
+//   for(var i = 0; i < table.rows.length; i++)
+//   {
+//       table.rows[i].onclick = function()
+//       {
+//           rIndex = this.rowIndex;
+//           //console.log(rIndex);
+          
+//           document.getElementById("fname").value = this.cells[0].innerHTML;
+//           document.getElementById("fgender").value = this.cells[1].innerHTML;
+//           document.getElementById("fmobile").value = this.cells[2].innerHTML;
+//           document.getElementById("femail").value = this.cells[3].innerHTML;
+//       };
+//   }
 
+var table = document.getElementById("tab"),rIndex;
+              
+  for(var i = 0; i < table.rows.length; i++)
+  {
+      table.rows[i].onclick = function()
+      {
+          rIndex = this.rowIndex;
+          //console.log(rIndex);
+          
+          document.getElementById("fname").value = this.cells[0].innerHTML;
+          document.getElementById("fgender").value = this.cells[1].innerHTML;
+          document.getElementById("fmobile").value = this.cells[2].innerHTML;
+          document.getElementById("femail").value = this.cells[3].innerHTML;
+      };
+  }
 
-
+ //save
+  function final()
+  {   rIndex-=1;
+      //console.log(document.getElementById("fname").value);
+     // console.log(rIndex);
+      table.rows[rIndex].cells[0].innerHTML = document.getElementById("fname").value;
+      table.rows[rIndex].cells[1].innerHTML = document.getElementById("fgender").value;
+      table.rows[rIndex].cells[2].innerHTML = document.getElementById("fmobile").value;
+      table.rows[rIndex].cells[3].innerHTML = document.getElementById("femail").value;
+  }
